@@ -99,6 +99,12 @@ For Hyprland, add this to hyprland.conf:
 bind = $mainMod, X, exec, ~/.local/bin/srsq-panel
 ```
 
+# Screenshot
+
+![App Screenshot](screenshots/screenshot.png)
+
+![srsq-panel demo](screenshots/demo.gif)
+
 # 📜 License
 
 MIT. Feel free to use and modify!
