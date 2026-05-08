@@ -1,9 +1,6 @@
-Here is your professional README.md in English. It’s written to be clear, concise, and easy for other developers or Linux enthusiasts to follow.
-srsq-panel
-
 A minimalist and stylish power management menu for Wayland (Sway, Hyprland, etc.), built with Rust using Relm4 and GTK4.
-✨ Features
 
+# ✨ Features
     Layer Shell Integration: Sits perfectly on top of your windows using the gtk4-layer-shell protocol.
 
     Smooth Animations: Features a sleek sliding animation from the right side of the screen.
@@ -12,48 +9,63 @@ A minimalist and stylish power management menu for Wayland (Sway, Hyprland, etc.
 
     Lightweight: Built with Rust for minimal resource consumption and high performance.
 
-🛠 Dependencies
+# 🛠 Dependencies
 
 Before building, ensure you have the following system libraries installed:
-Arch Linux
-Bash
-
+### Arch Linux
+``` Bash
 sudo pacman -S base-devel gtk4 gtk4-layer-shell pkgconf rust
+```
 
-Fedora
-Bash
-
+### Fedora
+```Bash
 sudo dnf install gtk4-devel gtk4-layer-shell-devel pkgconf-pkg-config
+```
 
-🚀 Build & Installation
+# 🚀 Build & Installation
 
-    Clone the repository:
-    Bash
+## 1. Script installation
+Clone the repository:
+``` Bash
+git clone https://github.com/Hitoshi-hub/srsq-panel.git
+cd srsq-panel
+``` 
 
-    git clone https://github.com/Hitoshi-hub/srsq-panel.git
-    cd srsq-panel
+And just run script install.sh
+``` Bash
+.\install.sh
+```
 
-    Build the release version:
-    Bash
+This script will build it, and install in /usr/local/bin/
 
-    cargo build --release
+## 2. Manual installing
 
-    Set up assets and binary:
-    The panel expects icons to be in your config directory. Run the following to set it up:
-    Bash
+Clone the repository:
+``` Bash
+git clone https://github.com/Hitoshi-hub/srsq-panel.git
+cd srsq-panel
+``` 
 
-    # Create config directory and copy assets
-    mkdir -p ~/.config/srsq-panel
-    cp assets/* ~/.config/srsq-panel/
+Build the release version:
+``` Bash
+cargo build --release
+```
 
-    # Move the binary to your local path
-    mkdir -p ~/.local/bin
-    cp target/release/srsq-panel ~/.local/bin/
+Set up assets and binary:
+The panel expects icons to be in your config directory. Run the following to set it up:
+``` Bash
+# Create config directory and copy assets
+mkdir -p ~/.config/srsq-panel
+cp assets/* ~/.config/srsq-panel/
+# Move the binary to your local path
+mkdir -p ~/.local/bin
+cp target/release/srsq-panel ~/.local/bin/ # Or at /usr/local/bin 
+```
 
-    Make it executable:
-    Bash
-
-    chmod +x ~/.local/bin/srsq-panel
+Make it executable:
+``` Bash
+chmod +x ~/.local/bin/srsq-panel
+```
 
 ⚙️ Configuration
 
@@ -75,16 +87,18 @@ Required Assets:
 ⌨️ Integration (Sway/Hyprland)
 
 Add the following to your Sway config file (~/.config/sway/config):
-Фрагмент кода
 
-# Bind to a key combination (e.g., Mod + Shift + E)
-bindsym $mod+Shift+e exec ~/.local/bin/srsq-panel
+``` Bash
+# Bind to a key combination (e.g., Mod + x)
+bindsym $mod+x exec ~/.local/bin/srsq-panel # Or just srsq-panel, if it installed at /usr/local/bin
+```
 
 For Hyprland, add this to hyprland.conf:
-Plaintext
 
-bind = $mainMod SHIFT, E, exec, ~/.local/bin/srsq-panel
+``` Bash
+bind = $mainMod, X, exec, ~/.local/bin/srsq-panel
+```
 
-📜 License
+# 📜 License
 
 MIT. Feel free to use and modify!
