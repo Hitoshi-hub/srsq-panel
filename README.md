@@ -101,9 +101,9 @@ bind = $mainMod, X, exec, ~/.local/bin/srsq-panel
 
 # Screenshot
 
-![App Screenshot](screenshots/screenshot.png)
+![App Screenshot](screenshot/screenshot.png)
 
-![srsq-panel demo](screenshots/demo.gif)
+![srsq-panel demo](screenshot/demo.gif)
 
 # 📜 License
 
