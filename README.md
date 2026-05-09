@@ -33,7 +33,7 @@ cd srsq-panel
 
 And just run script install.sh
 ``` Bash
-.\install.sh
+./install.sh
 ```
 
 This script will build it, and install in /usr/local/bin/
