@@ -7,6 +7,7 @@ use gtk4::glib;
 use std::time::Duration;
 use std::fs;
 use std::path::PathBuf;
+use std::os::unix::net::{UnixListener, UnixStream};
 
 struct PowerMenu {
     current_margin: f32,
@@ -143,6 +144,24 @@ impl Component for PowerMenu {
         sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
         
+        let socket_sender = sender.clone();
+        std::thread::spawn(move || {
+            let socket_path = "/tmp/srsq-panel.sock";
+
+            let _ = std::fs::remove_file(socket_path);
+
+            if let Ok(listener) = UnixListener::bind(socket_path){
+                for stream in listener.incoming() {
+                    if let Ok(_) = stream {
+                        socket_sender.input(Msg::Close);
+                    }
+                }
+            }
+        });
+        
+
+
+
         window.init_layer_shell();
         window.set_layer(Layer::Overlay);
         window.set_anchor(Edge::Right, true);
@@ -265,6 +284,11 @@ fn load_css() {
 
 
 fn main() {
+    let socket_path = "/tmp/srsq-panel.sock";
+    if let Ok(_) = UnixStream::connect(socket_path){
+        return;
+    }
+
     unsafe{std::env::set_var("GDK_BACKEND", "wayland");}
     let app = RelmApp::new("com.hitoshi.srsqpowermenu");
     load_css();
