@@ -162,7 +162,7 @@ impl Component for PowerMenu {
                                         set_from_file: Some(&model.exit_icon),
                                         set_pixel_size: 64,
                                     },
-                                    connect_clicked => Msg::Execute("exit".to_string()),
+                                    connect_clicked => Msg::Execute("loginctl terminate-user $USER".to_string()),
                                 },
                             }
                         }
