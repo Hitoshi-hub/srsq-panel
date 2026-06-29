@@ -766,7 +766,7 @@ dependencies = [
 
 [[package]]
 name = "srsq-panel"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "gtk4",
  "gtk4-layer-shell",
