@@ -14,7 +14,11 @@ struct PowerMenu {
     target_opacity: f32,
     panel_revealed: bool,
     is_closing: bool,
-    anim_stream: gtk4::MediaFile,
+
+    animation: gtk4::gdk_pixbuf::PixbufAnimation,
+    animation_iter: gtk4::gdk_pixbuf::PixbufAnimationIter,
+    animation_texture: gtk4::gdk::Texture,
+
     shutdown_icon: String,
     reboot_icon: String,
     sleep_icon: String,
@@ -132,7 +136,8 @@ impl Component for PowerMenu {
 
                                 gtk4::Image {
                                     add_css_class: "menu-gif",
-                                    set_paintable: Some(&model.anim_stream),
+                                    #[watch]
+                                    set_paintable: Some(&model.animation_texture),
                                     set_halign: gtk4::Align::Center,
                                     set_valign: gtk4::Align::Center,
                                     set_pixel_size: 128,
@@ -208,12 +213,15 @@ impl Component for PowerMenu {
         let get_path = |name: &str| format!("{}/{}", config_path, name);
 
         let gif_path = get_path("picture.gif");
-        let file = gtk4::gio::File::for_path(&gif_path);
+        let animation = 
+            gtk4::gdk_pixbuf::PixbufAnimation::from_file(&gif_path)
+                .expect("Failed to load picture.gif");
 
-        let anim_stream = gtk4::MediaFile::for_file(&file);
+        let animation_iter = animation.iter(None);
 
-        anim_stream.set_loop(true);
-        anim_stream.play();
+        let first_pixbuf = animation_iter.pixbuf();
+
+        let animation_texture = gtk4::gdk::Texture::for_pixbuf(&first_pixbuf);
 
         let model = PowerMenu {
             bg_opacity: 0.0,
@@ -221,7 +229,10 @@ impl Component for PowerMenu {
             panel_revealed: false,
             is_closing: false,
 
-            anim_stream,
+            animation,
+            animation_iter,
+            animation_texture,
+
             shutdown_icon: get_path("shutdown.png"),
             reboot_icon: get_path("reboot.png"),
             sleep_icon: get_path("sleep.png"),
@@ -248,6 +259,14 @@ impl Component for PowerMenu {
     ) {
         match msg {
             Msg::Tick => {
+                let now = std::time::SystemTime::now();
+
+                if self.animation_iter.advance(now) {
+                    let pixbuf = self.animation_iter.pixbuf();
+
+                    self.animation_texture =
+                        gtk4::gdk::Texture::for_pixbuf(&pixbuf);
+                    }
                 // Плавное изменение прозрачности фона
                 let target = if self.is_closing { 0.0 } else { self.target_opacity };
                 let diff = target - self.bg_opacity;
