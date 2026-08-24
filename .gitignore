@@ -1,1 +1,6 @@
 /target
+/.rpm/
+/pkg/
+/srsq-panel/
+/srsq-panel-*/
+/src/srsq-panel*

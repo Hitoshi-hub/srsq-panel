@@ -31,10 +31,11 @@ git clone https://github.com/Hitoshi-hub/srsq-panel.git
 cd srsq-panel
 ``` 
 
-And just run script install.sh
+And just run script install.sh (outdated, you can just install it from packages)
 ``` Bash
 ./install.sh
 ```
+
 
 This script will build it, and install in /usr/local/bin/
 

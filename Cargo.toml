@@ -1,10 +1,30 @@
 [package]
 name = "srsq-panel"
-version = "0.3.1"
+version = "0.3.2"
 edition = "2024"
+description = "Custom modular Wayland status panel for Sway"
+license = "MIT"
 
 [dependencies]
 gtk4 = {version = "0.11.0", package = "gtk4"}
 gtk4-layer-shell = "0.8.0"
 relm4 = "0.11.0"
 
+[package.metadata.deb]
+maintainer = "Hitoshi <ruriupin67@gmail.com>"
+copyright = "2026, Hitoshi <ruriupin67@gmail.com>"
+license-file = ["LICENSE", "4"]
+extended-description = """Custom modular Wayland status panel for Sway."""
+depends = "libgtk-4-1, libgtk4-layer-shell0, libc6"
+assets = [
+    ["target/release/srsq-panel", "usr/bin/", "755"],
+    ["resources/*", "usr/share/srsq-panel/", "644"]
+]
+[package.metadata.rpm]
+package = "srsq-panel"
+
+[package.metadata.rpm.cargo]
+buildflags = ["--release"]
+
+[package.metadata.rpm.targets]
+srsq-panel = { path = "/usr/bin/srsq-panel" }
