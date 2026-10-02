@@ -1,6 +1,6 @@
 A minimalist and stylish power management menu for Wayland (Sway, Hyprland, etc.), built with Rust using Relm4 and GTK4.
 
-# ✨ Features
+# Features
     Layer Shell Integration: Sits perfectly on top of your windows using the gtk4-layer-shell protocol.
 
     Smooth Animations: Features a sleek sliding animation from the right side of the screen.
@@ -9,7 +9,7 @@ A minimalist and stylish power management menu for Wayland (Sway, Hyprland, etc.
 
     Lightweight: Built with Rust for minimal resource consumption and high performance.
 
-# 🛠 Dependencies
+# Dependencies
 
 Before building, ensure you have the following system libraries installed:
 ### Arch Linux
@@ -22,7 +22,7 @@ sudo pacman -S base-devel gtk4 gtk4-layer-shell pkgconf rust
 sudo dnf install gtk4-devel gtk4-layer-shell-devel pkgconf-pkg-config
 ```
 
-# 🚀 Build & Installation
+# Build & Installation
 
 ## 1. Script installation
 Clone the repository:
@@ -68,7 +68,7 @@ Make it executable:
 chmod +x ~/.local/bin/srsq-panel
 ```
 
-⚙️ Configuration
+Configuration
 
 The panel looks for resources in ~/.config/srsq-panel/.
 Required Assets:
@@ -85,7 +85,7 @@ Required Assets:
 
     style.css — Custom styles (automatically created with defaults if not found).
 
-⌨️ Integration (Sway/Hyprland)
+Integration (Sway/Hyprland)
 
 Add the following to your Sway config file (~/.config/sway/config):
 
@@ -106,6 +106,6 @@ bind = $mainMod, X, exec, ~/.local/bin/srsq-panel
 
 ![srsq-panel demo](screenshot/demo.gif)
 
-# 📜 License
+# License
 
-MIT. Feel free to use and modify!
+MIT
